@@ -645,7 +645,7 @@ function! s:Unbalanced( matched )
         if tmp == matched
             " All paired chars eliminated
             let tmp = substitute( tmp, ')\(\s*\)(',   ' \1 ', 'g')
-            if &ft =~ '.*\(clojure\|scheme\|racket\fennel\).*'
+            if &ft =~ '.*\(clojure\|scheme\|racket\|fennel\).*'
                 let tmp = substitute( tmp, '\]\(\s*\)\[', ' \1 ', 'g')
                 let tmp = substitute( tmp, '}\(\s*\){',   ' \1 ', 'g')
             endif
