@@ -82,7 +82,7 @@ function! PareditInitBuffer()
     let b:paredit_init = 1
     " in case they are accidentally removed
     " Also define regular expressions to identify special characters used by paredit
-    if &ft =~ '.*\(clojure\|scheme\|racket\).*'
+    if &ft =~ '.*\(clojure\|scheme\|racket\|fennel\).*'
         let b:any_matched_char   = '(\|)\|\[\|\]\|{\|}\|\"'
         let b:any_matched_pair   = '()\|\[\]\|{}\|\"\"'
         let b:any_opening_char   = '(\|\[\|{'
@@ -107,7 +107,7 @@ function! PareditInitBuffer()
         inoremap <buffer> <expr>   "            PareditInsertQuotes()
         inoremap <buffer> <expr>   <BS>         PareditBackspace(0)
         inoremap <buffer> <expr>   <Del>        PareditDel()
-        if &ft =~ '.*\(clojure\|scheme\|racket\).*' && g:paredit_smartjump
+        if &ft =~ '.*\(clojure\|scheme\|racket\|fennel\).*' && g:paredit_smartjump
             nnoremap <buffer> <silent> (            :<C-U>call PareditSmartJumpOpening(0)<CR>
             nnoremap <buffer> <silent> )            :<C-U>call PareditSmartJumpClosing(0)<CR>
             vnoremap <buffer> <silent> (            <Esc>:<C-U>call PareditSmartJumpOpening(1)<CR>
@@ -150,7 +150,7 @@ function! PareditInitBuffer()
         execute 'nmap     <buffer> <silent> ' . g:paredit_leader.'<Up>    d[(,S'
         execute 'nmap     <buffer> <silent> ' . g:paredit_leader.'<Down>  d])%,S'
         call RepeatableNNoRemap(g:paredit_leader . 'I', ':<C-U>call PareditRaise()')
-        if &ft =~ '.*\(clojure\|scheme\|racket\).*'
+        if &ft =~ '.*\(clojure\|scheme\|racket\|fennel\).*'
             inoremap <buffer> <expr>   [            PareditInsertOpening('[',']')
             inoremap <buffer> <silent> ]            <C-R>=(pumvisible() ? "\<lt>C-Y>" : "")<CR><C-O>:let save_ve=&ve<CR><C-O>:set ve=all<CR><C-O>:<C-U>call PareditInsertClosing('[',']')<CR><C-O>:let &ve=save_ve<CR>
             inoremap <buffer> <expr>   {            PareditInsertOpening('{','}')
